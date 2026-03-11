@@ -1,0 +1,6 @@
+2026-03-11 16:06:29 INFO  org.connect4.database.Database - Connected to database successfully.
+2026-03-11 16:06:29 INFO  org.connect4.database.Database - Database table 'high_scores' initialized successfully.
+2026-03-11 16:07:00 INFO  org.connect4.database.Database - Connected to database successfully.
+2026-03-11 16:07:00 INFO  org.connect4.database.Database - Database table 'high_scores' initialized successfully.
+2026-03-11 16:07:23 INFO  org.connect4.database.Database - Added new player 'Computer' with 1 win.
+2026-03-11 16:07:30 INFO  org.connect4.database.Database - Database connection closed.
