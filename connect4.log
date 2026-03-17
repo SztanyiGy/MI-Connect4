@@ -4,3 +4,16 @@
 2026-03-11 16:07:00 INFO  org.connect4.database.Database - Database table 'high_scores' initialized successfully.
 2026-03-11 16:07:23 INFO  org.connect4.database.Database - Added new player 'Computer' with 1 win.
 2026-03-11 16:07:30 INFO  org.connect4.database.Database - Database connection closed.
+2026-03-17 15:02:20 INFO  org.connect4.database.Database - Connected to database successfully.
+2026-03-17 15:02:20 INFO  org.connect4.database.Database - Database table 'high_scores' initialized successfully.
+2026-03-17 15:18:08 INFO  org.connect4.database.Database - Connected to database successfully.
+2026-03-17 15:18:08 INFO  org.connect4.database.Database - Database table 'high_scores' initialized successfully.
+2026-03-17 15:19:37 INFO  org.connect4.database.Database - Connected to database successfully.
+2026-03-17 15:19:37 INFO  org.connect4.database.Database - Database table 'high_scores' initialized successfully.
+2026-03-17 15:19:42 INFO  org.connect4.database.Database - Displayed high scores successfully.
+2026-03-17 15:20:02 INFO  org.connect4.database.Database - Updated win count for player 'Computer'.
+2026-03-17 15:24:53 INFO  org.connect4.database.Database - Connected to database successfully.
+2026-03-17 15:24:53 INFO  org.connect4.database.Database - Database table 'high_scores' initialized successfully.
+2026-03-17 15:25:26 INFO  org.connect4.database.Database - Updated win count for player 'Computer'.
+2026-03-17 15:25:29 INFO  org.connect4.database.Database - Displayed high scores successfully.
+2026-03-17 15:25:36 INFO  org.connect4.database.Database - Database connection closed.
