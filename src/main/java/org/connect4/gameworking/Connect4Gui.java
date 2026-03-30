@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
@@ -22,6 +24,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
 
 /**
  * Egyszerű Swing alapú GUI a Connect4 játékhoz.
@@ -106,7 +109,7 @@ public final class Connect4Gui {
         newGameButton.addActionListener(e -> resetGame());
 
         JButton scoresButton = new JButton("High score-ok");
-        scoresButton.addActionListener(e -> database.displayHighScores());
+        scoresButton.addActionListener(e -> showHighScoresDialog());
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.add(statusLabel, BorderLayout.CENTER);
@@ -148,6 +151,39 @@ public final class Connect4Gui {
             Connect4Gui gui = new Connect4Gui();
             gui.show();
         });
+    }
+
+
+    private void showHighScoresDialog() {
+        List<Database.ScoreEntry> scores = database.getHighScores();
+        if (scores.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    frame,
+                    "Még nincs mentett high score.",
+                    "High score-ok",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        String[] columns = {"Név", "Győzelem"};
+        Object[][] data = new Object[scores.size()][2];
+        for (int i = 0; i < scores.size(); i++) {
+            data[i][0] = scores.get(i).getPlayerName();
+            data[i][1] = scores.get(i).getWins();
+        }
+
+        JTable table = new JTable(data, columns);
+        table.setEnabled(false);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new java.awt.Dimension(340, 220));
+
+        JOptionPane.showMessageDialog(
+                frame,
+                scrollPane,
+                "High score-ok",
+                JOptionPane.INFORMATION_MESSAGE
+        );
     }
 
     private void handleHumanMove(final int column) {

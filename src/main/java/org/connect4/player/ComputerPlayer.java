@@ -1,11 +1,12 @@
 package org.connect4.player;
 
-
-import org.connect4.model.Board;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import org.connect4.model.Board;
+
+
 
 
 /**
