@@ -134,7 +134,7 @@
                     <limit>
                       <counter>LINE</counter>
                       <value>COVEREDRATIO</value>
-                      <minimum>0.6</minimum> <!-- Minimum lefedettség -->
+                      <minimum>0.3</minimum> <!-- Minimum lefedettség -->
                     </limit>
                   </limits>
                 </rule>

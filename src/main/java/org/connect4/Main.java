@@ -1,5 +1,6 @@
 package org.connect4;
 
+import org.connect4.gameworking.Connect4Gui;
 import org.connect4.gameworking.Game;
 import org.connect4.gameworking.InputReader;
 
@@ -24,9 +25,23 @@ public final class Main {
      * @param args A parancssori argumentumok.
      */
     public static void main(final String[] args) {
-        InputReader inputReader = new InputReader(System.in);  // Scanner helyett InputReader-t használunk
-        Game game = new Game(inputReader);
-        game.showMenu();
+        if (isCliMode(args)) {
+            InputReader inputReader = new InputReader(System.in);
+            Game game = new Game(inputReader);
+            game.showMenu();
+            return;
+        }
+
+        Connect4Gui.launch();
+    }
+
+    private static boolean isCliMode(final String[] args) {
+        for (String arg : args) {
+            if ("--cli".equalsIgnoreCase(arg) || "--terminal".equalsIgnoreCase(arg)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Privát konstruktor

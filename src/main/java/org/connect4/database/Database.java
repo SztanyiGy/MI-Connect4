@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +19,24 @@ import org.slf4j.LoggerFactory;
 public class Database {
     private static final Logger LOGGER = LoggerFactory.getLogger(Database.class);
     private Connection connection;
+
+    public static final class ScoreEntry {
+        private final String playerName;
+        private final int wins;
+
+        public ScoreEntry(final String name, final int winCount) {
+            this.playerName = name;
+            this.wins = winCount;
+        }
+
+        public String getPlayerName() {
+            return playerName;
+        }
+
+        public int getWins() {
+            return wins;
+        }
+    }
 
     /**
      * Inicializálja az adatbázis kapcsolatot, és létrehozza a szükséges táblát, ha az nem létezik.
@@ -100,22 +120,35 @@ public class Database {
     /**
      * Megjeleníti a legjobb eredményeket, győzelmek szerint csökkenő sorrendben rendezve.
      */
-    public void displayHighScores() {
+    public List<ScoreEntry> getHighScores() {
+        List<ScoreEntry> scores = new ArrayList<>();
         try (Statement statement = connection.createStatement()) {
             String sql = "SELECT player_name, wins FROM high_scores ORDER BY wins DESC";
             ResultSet rs = statement.executeQuery(sql);
 
-            System.out.printf("%-20s %s%n", "Name", "Wins");
-            System.out.println("-------------------- -----");
+
             while (rs.next()) {
-                String player = rs.getString("player_name");
-                int wins = rs.getInt("wins");
-                System.out.printf("%-20s %d%n", player, wins);
+
+                scores.add(new ScoreEntry(rs.getString("player_name"), rs.getInt("wins")));
             }
-            LOGGER.info("Displayed high scores successfully.");
+
         } catch (SQLException e) {
-            LOGGER.error("Failed to display high scores: {}", e.getMessage());
+            LOGGER.error("Failed to query high scores: {}", e.getMessage());
         }
+        return scores;
+    }
+
+    /**
+     * Megjeleníti a legjobb eredményeket, győzelmek szerint csökkenő sorrendben rendezve.
+     */
+    public void displayHighScores() {
+        List<ScoreEntry> scores = getHighScores();
+        System.out.printf("%-20s %s%n", "Name", "Wins");
+        System.out.println("-------------------- -----");
+        for (ScoreEntry score : scores) {
+            System.out.printf("%-20s %d%n", score.getPlayerName(), score.getWins());
+        }
+        LOGGER.info("Displayed high scores successfully.");
     }
 
     /**
